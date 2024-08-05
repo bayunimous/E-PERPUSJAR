@@ -85,12 +85,16 @@ if (session()->getFlashdata('msg')) : ?>
               <b><?= $loanCreateDate->toLocalizedString('HH:mm:ss'); ?></b>
             </td>
             <td class="text-center">
-              <?php if ($now->isBefore($loanDueDate)) : ?>
-                <span class="badge bg-success rounded-3 fw-semibold">Normal</span>
-              <?php elseif ($now->today()->equals($loanDueDate)) : ?>
-                <span class="badge bg-warning rounded-3 fw-semibold">Jatuh tempo</span>
+              <?php if ($loan['status_loan'] == 'Setuju') : ?>
+                <span class="badge bg-success rounded-3 fw-semibold">Disetujui</span>
+              <?php elseif ($loan['status_return'] == 'Setuju') : ?>
+                <span class="badge bg-warning rounded-3 fw-semibold">Selesai</span>
+              <?php elseif ($loan['status_loan'] == 'Proses') : ?>
+                <span class="badge bg-warning rounded-3 fw-semibold">Proses</span>
+              <?php elseif ($loan['status_loan'] == 'Tolak') : ?>
+                <span class="badge bg-danger rounded-3 fw-semibold">Ditolak</span>
               <?php else : ?>
-                <span class="badge bg-danger rounded-3 fw-semibold">Terlambat</span>
+                <span class="badge bg-danger rounded-3 fw-semibold">Tidak Diketahui</span>
               <?php endif; ?>
             </td>
           </tr>
