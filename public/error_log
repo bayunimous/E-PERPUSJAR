@@ -1,0 +1,6 @@
+[24-Jul-2024 02:48:48 Asia/Jakarta] PHP Fatal error:  Cannot redeclare Config\Filters::$filters in /home/sornarr3/ig.sornarrin-pedia.my.id/app/Config/Filters.php on line 68
+[24-Jul-2024 02:48:48 Asia/Jakarta] PHP Fatal error:  Cannot redeclare Config\Filters::$filters in /home/sornarr3/ig.sornarrin-pedia.my.id/app/Config/Filters.php on line 68
+[24-Jul-2024 02:48:57 Asia/Jakarta] PHP Fatal error:  Cannot redeclare Config\Filters::$filters in /home/sornarr3/ig.sornarrin-pedia.my.id/app/Config/Filters.php on line 68
+[24-Jul-2024 02:48:59 Asia/Jakarta] PHP Fatal error:  Cannot redeclare Config\Filters::$filters in /home/sornarr3/ig.sornarrin-pedia.my.id/app/Config/Filters.php on line 68
+[24-Jul-2024 02:50:37 Asia/Jakarta] PHP Fatal error:  Cannot redeclare Config\Filters::$filters in /home/sornarr3/ig.sornarrin-pedia.my.id/app/Config/Filters.php on line 68
+[28-Jul-2024 21:44:22 Asia/Jakarta] PHP Fatal error:  Cannot redeclare App\Controllers\Loans\ReturnsController::reportReturns() in /home/sornarr3/ig.sornarrin-pedia.my.id/app/Controllers/Loans/ReturnsController.php on line 386
