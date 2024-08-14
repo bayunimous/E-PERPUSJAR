@@ -111,7 +111,7 @@ class LoansController extends BaseController
 
                 $data = [
                     'api_key'           => 'FNHBA401J42948KEATX28CZH6GAC5KY9',
-                    'device_key'        => 'MYVMJB',
+                    'device_key'        => 'LKAWLH',
                     'destination'       => preg_replace('/\D/', '', $members['phone']),
                     'message'           => $message,
                 ];
@@ -138,7 +138,7 @@ class LoansController extends BaseController
 
                 $data = [
                     'api_key'           => 'FNHBA401J42948KEATX28CZH6GAC5KY9',
-                    'device_key'        => 'MYVMJB',
+                    'device_key'        => 'LKAWLH',
                     'destination'       => preg_replace('/\D/', '', $members['phone']),
                     'message'           => $message,
                 ];
@@ -243,7 +243,7 @@ class LoansController extends BaseController
 
         $data = [
             'api_key'           => 'FNHBA401J42948KEATX28CZH6GAC5KY9',
-            'device_key'        => 'MYVMJB',
+            'device_key'        => 'LKAWLH',
             'destination'       => preg_replace('/\D/', '', $members['phone']),
             'message'           => 'Hallo *'.$members['first_name'].' '.$members['last_name'].'* peminjaman buku kamu dengan judul buku *'.$book['title'].'* telah disetujui oleh *'.$this->base_data['user']['full_name'].'* dengan jadwal pengembalian pada tanggal *'.$loan['due_date'].'*. Terimakasih telah mengunjungin E-PERPUSJAR.',
         ];
@@ -285,7 +285,7 @@ class LoansController extends BaseController
 
         $data = [
             'api_key'           => 'FNHBA401J42948KEATX28CZH6GAC5KY9',
-            'device_key'        => 'MYVMJB',
+            'device_key'        => 'LKAWLH',
             'destination'       => preg_replace('/\D/', '', $members['phone']),
             'message'           => 'Hallo *'.$members['first_name'].' '.$members['last_name'].'* peminjaman buku kamu dengan judul buku *'.$book['title'].'* ditolak oleh *'.$this->base_data['user']['full_name'].'* dengan jadwal pengembalian pada tanggal *'.$loan['due_date'].'*. Terimakasih telah mengunjungin E-PERPUSJAR.',
         ];

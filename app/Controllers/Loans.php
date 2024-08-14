@@ -381,7 +381,7 @@ class Loans extends BaseController
 
         $data = [
             'api_key'           => 'FNHBA401J42948KEATX28CZH6GAC5KY9',
-            'device_key'        => 'MYVMJB',
+            'device_key'        => 'LKAWLH',
             'destination'       => preg_replace('/\D/', '', $petugas['phone']),
             'message'           => 'Hallo *'.$petugas['full_name'].'* ada peminjaman buku baru *'.$book['title'].'* dari *'.$member['first_name'].' '.$member['last_name'].'* pada tanggal *'.Time::now()->toDateTimeString().'*.',
         ];

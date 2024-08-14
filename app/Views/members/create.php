@@ -69,6 +69,22 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control <?php if ($validation->hasError('username')) : ?>is-invalid<?php endif ?>" id="username" name="username" value="<?= $oldInput['username'] ?? ''; ?>" placeholder="johndoe" required>
+          <div class="invalid-feedback">
+            <?= $validation->getError('username'); ?>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control <?php if ($validation->hasError('password')) : ?>is-invalid<?php endif ?>" id="password" name="password" value="<?= $oldInput['password'] ?? ''; ?>" placeholder="*****" required>
+          <div class="invalid-feedback">
+            <?= $validation->getError('password'); ?>
+          </div>
+        </div>
+      </div>
       <div class="mb-3">
         <label for="address" class="form-label">Alamat</label>
         <textarea class="form-control <?php if ($validation->hasError('address')) : ?>is-invalid<?php endif ?>" id="address" name="address" required><?= $oldInput['address'] ?? ''; ?></textarea>

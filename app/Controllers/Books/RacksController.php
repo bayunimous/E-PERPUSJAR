@@ -155,7 +155,7 @@ class RacksController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Insert new rack successful']);
-        return redirect()->to('admin/racks');
+        return redirect()->to('racks');
     }
 
     /**
@@ -234,7 +234,7 @@ class RacksController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Update rack successful']);
-        return redirect()->to('admin/racks');
+        return redirect()->to('racks');
     }
 
     /**
@@ -261,6 +261,6 @@ class RacksController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Rack deleted successfully']);
-        return redirect()->to('admin/racks');
+        return redirect()->to('racks');
     }
 }

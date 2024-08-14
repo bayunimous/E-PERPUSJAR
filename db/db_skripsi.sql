@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 05, 2024 at 10:19 AM
+-- Generation Time: Aug 09, 2024 at 02:35 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -108,7 +108,8 @@ INSERT INTO `books` (`id`, `slug`, `title`, `author`, `publisher`, `isbn`, `year
 (58, 'ipsam-excepturi-qui77390', 'Ipsam excepturi qui.', 'Pangestu Latupono', 'PJ Mayasari Tbk', '9794316057476', '1978', 5, 2, 'book-8.jpg', '2024-01-10 17:47:13', '2024-01-10 17:47:13', NULL),
 (59, 'pariatur-a-aut-quasi93725', 'Pariatur a aut quasi.', 'Najwa Elisa Namaga', 'Perum Pudjiastuti', '9797165547662', '1984', 9, 1, 'book-8.jpg', '2024-01-10 17:47:13', '2024-01-10 17:47:13', NULL),
 (60, 'ullam-voluptas-rerum-occaecati52051', 'Ullam voluptas rerum occaecati.', 'Melinda Hasanah', 'Perum Wacana Rahmawati', '9798502288286', '2003', 4, 4, 'book-5.jpg', '2024-01-10 17:47:13', '2024-01-10 17:47:13', NULL),
-(61, 'sejarah-banjar-623', 'Sejarah Banjar', 'Suriansyah Ideham dkk.', 'Gramedia', '1230401284', '2012', 20, 3, '1706063277_1f3815f5a0afec139e23.jpg', '2024-01-24 01:27:57', '2024-01-24 01:27:57', NULL);
+(61, 'sejarah-banjar-623', 'Sejarah Banjar', 'Suriansyah Ideham dkk.', 'Gramedia', '1230401284', '2015', 20, 3, '1706063277_1f3815f5a0afec139e23.jpg', '2024-01-24 01:27:57', '2024-08-07 12:13:32', NULL),
+(62, 'naruto-420', 'Naruto', 'Masasi Kishimoto', 'Shounen Jump', '12345678910', '1995', 23, 9, '1723034649_0e28370f70ae40f90ba8.jpg', '2024-08-07 11:44:09', '2024-08-07 12:12:24', '2024-08-07 12:12:24');
 
 -- --------------------------------------------------------
 
@@ -220,7 +221,7 @@ INSERT INTO `book_stock` (`id`, `book_id`, `quantity`, `created_at`, `updated_at
 (88, 58, 82, '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
 (89, 59, 34, '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
 (90, 60, 46, '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
-(91, 61, 100, '2024-01-24 01:27:57', '2024-01-24 01:27:57', NULL);
+(91, 61, 100, '2024-01-24 01:27:57', '2024-08-07 12:13:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -250,7 +251,10 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`
 (7, 'Non-Fiksi', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
 (8, 'Sejarah', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
 (9, 'Komik', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
-(10, 'Teknologi', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL);
+(10, 'Teknologi', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
+(11, 'Manga X', '2024-08-07 04:16:08', '2024-08-07 04:21:33', '2024-08-07 04:21:33'),
+(12, 'Tes', '2024-08-07 04:19:34', '2024-08-07 04:19:40', '2024-08-07 04:19:40'),
+(13, 'Horor x Thriller', '2024-08-07 12:15:57', '2024-08-07 12:21:17', '2024-08-07 12:21:17');
 
 -- --------------------------------------------------------
 
@@ -297,8 +301,8 @@ CREATE TABLE `fines` (
 --
 
 INSERT INTO `fines` (`id`, `loan_id`, `amount_paid`, `fine_amount`, `paid_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 3, 20000, 20000, '2024-01-27 14:26:00', '2024-01-10 18:47:06', '2024-01-27 06:26:00', NULL),
-(2, 4, 15000, 15000, '2023-08-24 09:00:00', '2024-01-10 18:47:06', '2024-01-10 18:47:06', NULL);
+(1, NULL, 20000, 20000, '2024-01-27 14:26:00', '2024-01-10 18:47:06', '2024-01-27 06:26:00', NULL),
+(2, NULL, 15000, 15000, '2023-08-24 09:00:00', '2024-01-10 18:47:06', '2024-01-10 18:47:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -328,20 +332,8 @@ CREATE TABLE `loans` (
 --
 
 INSERT INTO `loans` (`id`, `uid`, `book_id`, `quantity`, `member_id`, `loan_date`, `due_date`, `return_date`, `qr_code`, `status_loan`, `status_return`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '356a192b7913b04c54574d18c28d46e6395428ab', 1, 1, 1, '2023-08-21 00:00:00', '2023-08-28', NULL, NULL, 'Setuju', '', '2024-01-10 18:47:06', '2024-01-10 18:47:06', NULL),
-(2, 'da4b9237bacccdf19c0760cab7aec4a8359010b0', 4, 1, 2, '2023-08-13 00:00:00', '2023-08-20', NULL, NULL, 'Setuju', '', '2024-01-10 18:47:06', '2024-01-10 18:47:06', NULL),
-(3, '77de68daecd823babbb58edb1c8e14d7106e83bb', 2, 5, 3, '2023-08-13 00:00:00', '2023-08-20', '2023-08-24 00:00:00', NULL, 'Setuju', 'Setuju', '2024-01-10 18:47:06', '2024-08-01 10:17:43', NULL),
-(4, '1b6453892473a467d07372d45eb05abc2031647a', 1, 1, 4, '2023-08-07 00:00:00', '2023-08-21', '2023-08-24 00:00:00', NULL, 'Setuju', 'Setuju', '2024-01-10 18:47:06', '2024-08-01 15:05:18', NULL),
-(5, '58eaff6c982a4dc466105a9f0c679f75e28a7f98', 3, 1, 11, '2024-01-22 19:34:38', '2024-01-29', '2024-01-24 09:29:06', NULL, 'Setuju', 'Setuju', '2024-01-22 11:34:38', '2024-08-01 15:07:15', NULL),
-(6, '4d7fd653a2bf6e9691ae4bb75f530d6f1f033b9f', 1, 4, 11, '2024-01-22 19:36:52', '2024-02-21', NULL, 'utuh-nanang_minu_efcc7_1705927012.png', 'Setuju', '', '2024-01-22 11:36:52', '2024-01-22 11:36:52', NULL),
-(7, 'dd3e007d4681bfd593245b5221829598d7310480', 61, 2, 12, '2024-01-24 09:29:45', '2024-02-23', NULL, 'galuh-banjar_sej_1a547_1706063385.png', 'Setuju', '', '2024-01-24 01:29:45', '2024-01-24 01:29:45', NULL),
-(8, '319f9c65f699bfe37b5bb8d9bde0a62993c292c1', 15, 3, 13, '2024-01-27 14:19:52', '2024-02-10', NULL, 'udin-sedunia_aut_53667_1706339992.png', 'Setuju', '', '2024-01-27 06:19:52', '2024-01-27 06:19:52', NULL),
-(9, '3f71292fbce2d3a3e4fdee0dedc494158999b3a0', 26, 10, 9, '2024-01-27 14:20:37', '2024-02-26', NULL, 'agnes-hasana_sap_61260_1706340037.png', 'Setuju', '', '2024-01-27 06:20:37', '2024-01-27 06:20:37', NULL),
-(10, 'b6320f11621628809d553ce2e9344893c49ccaea', 15, 7, 14, '2024-01-27 14:23:25', '2024-02-10', NULL, 'panglima-tem_aut_5c999_1706340205.png', 'Setuju', '', '2024-01-27 06:23:25', '2024-01-27 06:23:25', NULL),
-(11, 'b40249e885e33c141e64467142866bb39b8819c0', 20, 7, 14, '2024-01-27 14:23:25', '2024-02-26', NULL, 'panglima-tem_ips_b6852_1706340205.png', 'Setuju', '', '2024-01-27 06:23:25', '2024-01-27 06:23:25', NULL),
 (12, 'e394b15d339426e1657d59d25e5960f946541804', 61, 1, 16, '2024-08-04 10:29:28', '2024-08-11', NULL, 'bayu_sejarah-ban_d9286_1722742168.png', 'Setuju', '', '2024-08-04 02:29:28', '2024-08-04 02:31:24', NULL),
-(13, '1f2332409f0db16c2dee55e95d1871df55d86a9d', 61, 2, 17, '2024-08-05 11:21:40', '2024-08-19', NULL, 'fauzi-yusa-r_sej_31a9d_1722831700.png', 'Setuju', '', '2024-08-05 03:21:40', '2024-08-05 03:23:21', NULL),
-(14, 'f872454a9c102d35ba66f91eaccabb9e6699d65b', 2, 3, 16, '2024-08-05 17:12:13', '2024-08-19', NULL, 'bayu-nugraha_err_a66ca_1722852733.png', 'Proses', '', '2024-08-05 09:12:13', '2024-08-05 09:12:13', NULL);
+(13, '1f2332409f0db16c2dee55e95d1871df55d86a9d', 61, 2, 17, '2024-08-05 11:21:40', '2024-08-19', NULL, 'fauzi-yusa-r_sej_31a9d_1722831700.png', 'Setuju', '', '2024-08-05 03:21:40', '2024-08-05 03:23:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -381,14 +373,18 @@ INSERT INTO `members` (`id`, `uid`, `first_name`, `last_name`, `email`, `phone`,
 (7, '4cfe771a0e89d17a9d0becd3831876044e066d05', 'Okto', 'Nugroho', 'cpalastri@yahoo.co.id', '0536 5598 967', '', '', 'Psr. Daan No. 58, Bandar Lampung 78899, Jabar', '1974-09-03', 'Male', NULL, '2024-01-10 17:47:20', '2024-01-10 17:47:20', NULL),
 (8, 'fed8fff60e1e5a2508f48b81f52fa15568f40ec3', 'Harjaya', 'Mandala', 'lsudiati@wibisono.go.id', '(+62) 442 3267 1960', '', '', 'Jr. Veteran No. 244, Ambon 98381, NTB', '1982-01-14', 'Male', NULL, '2024-01-10 17:47:20', '2024-01-10 17:47:20', NULL),
 (9, '21749e4be2e62bfee2d14f97782bc8748bc84971', 'Agnes', 'Hasanah', 'fitria.nasyiah@yahoo.co.id', '0559 1930 475', '', '', 'Psr. Bakin No. 463, Sorong 13717, Malut', '2014-12-25', 'Female', NULL, '2024-01-10 17:47:20', '2024-01-10 17:47:20', NULL),
-(10, 'cb016695fb555da6837a156da22c280dca7e2c69', 'Dimas', 'Sinaga', 'wahyudin.ajimin@agustina.co.id', '(+62) 931 9420 898', '', '', 'Gg. Kartini No. 144, Tangerang Selatan 38743, Jabar', '1979-01-28', 'Male', NULL, '2024-01-10 17:47:20', '2024-01-10 17:47:20', NULL),
+(10, 'cb016695fb555da6837a156da22c280dca7e2c69', 'Dimas', 'Sinaga', 'wahyudin.ajimin@agustina.co.id', '(+62) 931 9420 898', '', '', 'Gg. Kartini No. 144, Tangerang Selatan 38743, Jabar', '1979-01-28', 'Male', NULL, '2024-01-10 17:47:20', '2024-08-07 11:06:41', '2024-08-07 11:06:41'),
 (11, '12420cee42a37128d4b859884ecc08b0afe40c9c', 'Utuh', 'Nanang', 'utuhnanang@gmail.com', '+628233939393', '', '', 'Jl. Banjarmasin', '2001-06-26', 'Male', 'utuh-nanang_584c8_1705926601.png', '2024-01-22 11:30:01', '2024-01-22 11:30:01', NULL),
 (12, 'ff6179d38456a55d7604f9c60706fb259dd92054', 'Galuh', 'Banjar', 'galuhbanjar@email.com', '+62823812432', '', '', 'Jl. Belitung Darat', '2002-02-06', 'Female', 'galuh-banjar_be925_1706063333.png', '2024-01-24 01:28:54', '2024-01-24 01:28:54', NULL),
 (13, '8b1c772b86dbc5ab4ee0d819af070f33bcaaba26', 'Udin', 'Sedunia', 'udinudin@email.com', '+628438284328', '', '', 'Jl. Udin', '2001-12-02', 'Male', 'udin-sedunia_f57a6_1706069292.png', '2024-01-24 03:08:12', '2024-01-24 03:08:12', NULL),
 (14, 'bb23abb0b7c655a1dbbe09ebe4f745dab11b6c1a', 'Panglima', 'Tempur', 'panglima@email.com', '+628255555', '', '', 'Jl .Tempur Rakyat', '2001-12-02', 'Male', 'panglima-tempur_3a487_1706340137.png', '2024-01-27 06:22:17', '2024-01-27 06:22:17', NULL),
-(15, 'ec8bba1ab8d698cef8da50e41ad004ae74cd5096', 'Muh Syahrul', 'Minanul Aziz', 'msyahrulma@gmail.com', '+6281572323740', 'arul13', '$2y$10$/YKqkI/OAND4Ey0RReBeK.q3rE.vYEoLxJo4BdYqqRDai5zc4ajzm', 'rhtrhr', '2024-07-17', 'Male', 'muh-syahrul-mina_f0179_1722189771.png', '2024-07-28 18:02:51', '2024-07-28 18:02:51', NULL),
+(15, 'ec8bba1ab8d698cef8da50e41ad004ae74cd5096', 'Muh Syahrul', 'asdsa', 'msyahrulma@gmail.com', '+6281572323740', 'arul13', '$2y$10$/YKqkI/OAND4Ey0RReBeK.q3rE.vYEoLxJo4BdYqqRDai5zc4ajzm', 'rhtrhr', '2024-07-17', 'Male', 'muh-syahrul-mina_f0179_1722189771.png', '2024-07-28 18:02:51', '2024-08-07 12:06:03', '2024-08-07 12:06:03'),
 (16, '2027863b2d23cd256658b15cc72bc49ad03044eb', 'Bayu', 'Nugraha', 'bayu@email.com', '+6282339449735', 'bayu', '$2y$10$zuUzcQKKl5P8cgLjAOPneeG185uGTbkYHE.1zwHBm6UsIyvA9/v1y', 'Banjarmasin', '2001-06-26', 'Male', 'bayu-nugraha_f57d2_1722814492.png', '2024-07-29 15:45:53', '2024-08-04 22:34:53', NULL),
-(17, '8ef6ba4ea0bdb64abbc5e2ea0eb7051b51035747', 'Fauzi', 'Yusa Rahman', 'fauzi@email.com', '6285251117979', 'fauziyr', '$2y$10$DWDmnTzRXPPsEKMJFhhKV.mPMFSvowIlwLdT61PIOEsIGr0KZoaGC', 'Banjarmasin', '1990-08-12', 'Male', 'fauzi-yusa-rahma_73b09_1722831614.png', '2024-08-05 03:20:15', '2024-08-05 03:20:15', NULL);
+(17, '8ef6ba4ea0bdb64abbc5e2ea0eb7051b51035747', 'Fauzi', 'Yusa Rahman', 'fauzi@email.com', '6285251117979', 'fauziyr', '$2y$10$DWDmnTzRXPPsEKMJFhhKV.mPMFSvowIlwLdT61PIOEsIGr0KZoaGC', 'Banjarmasin', '1990-08-12', 'Male', 'fauzi-yusa-rahma_73b09_1722831614.png', '2024-08-05 03:20:15', '2024-08-05 03:20:15', NULL),
+(18, '', 'asdsad', 'asdsad', 'asdsad@email.com', '+627272727', '', '', 'sadsa', '2001-12-12', 'Male', NULL, '2024-08-07 11:57:19', '2024-08-07 11:57:19', NULL),
+(19, 'd8110072cdda56734ea55c6ef0fce41e97ea87a7', 'Baba', 'baba', 'baba@email.com', '+6282838238', 'baba223', '$2y$10$eVk1sCQCovq/7pWB60e/DetXn4Yp720NaARLgrgZw0z10rEOOF1uC', 'nAANSN', '2000-12-12', 'Male', 'baba-baba_cd4a6_1723035499.png', '2024-08-07 11:58:19', '2024-08-07 11:59:24', '2024-08-07 11:59:24'),
+(20, '1273aa8eeeee1c49ada8c0ad6135bb07613408b9', 'er', 'hrt', 'erg@gmail.com', '+6283453453534', 'wefwfwefewfwef', '$2y$10$AogvSdsVvenrp0ZfRDS1m.Yptyjptnisa8bDFbNyX36TqI0ntYySG', 'ewfgwf', '2024-08-07', 'Male', 'er-hrt_70208_1723043130.png', '2024-08-07 14:05:30', '2024-08-07 14:10:22', '2024-08-07 14:10:22'),
+(21, 'ffecb4cf359979e35ee134f43d4e610582ac66e3', 'John', 'Doe', 'john@email.com', '+62822222', 'johndoe', '$2y$10$EVqHxsGdlckNhoqlsyD3L.AG1HtHQK.Weanh2HvB4uT3hodieLAIa', 'Banjarmasin', '2000-12-12', 'Male', 'john-doe_3b5b9_1723043452.png', '2024-08-07 14:10:52', '2024-08-07 14:10:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -485,7 +481,11 @@ INSERT INTO `racks` (`id`, `name`, `floor`, `created_at`, `updated_at`, `deleted
 (17, '3A', '3', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
 (18, '3B', '3', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
 (19, '3C', '3', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
-(20, '3D', '3', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL);
+(20, '3D', '3', '2024-01-10 18:47:13', '2024-01-10 18:47:13', NULL),
+(21, '6A', '5', '2024-08-07 04:15:03', '2024-08-07 04:15:03', NULL),
+(22, '7B', '7', '2024-08-07 04:15:43', '2024-08-07 04:15:43', NULL),
+(23, '10C', '10', '2024-08-07 04:43:49', '2024-08-07 04:43:49', NULL),
+(24, '99B', '99', '2024-08-07 12:21:48', '2024-08-07 12:22:41', '2024-08-07 12:22:41');
 
 -- --------------------------------------------------------
 
@@ -529,7 +529,25 @@ INSERT INTO `reports` (`id`, `user_id`, `description`, `created_at`, `updated_at
 (21, 3, 'Cetak Peminjaman', '2024-07-31 19:04:01', '2024-07-31 19:04:01'),
 (22, 3, 'Cetak Peminjaman', '2024-07-31 19:04:07', '2024-07-31 19:04:07'),
 (23, 3, 'Cetak Peminjaman', '2024-07-31 20:29:02', '2024-07-31 20:29:02'),
-(24, 3, 'Cetak Peminjaman', '2024-07-31 20:29:05', '2024-07-31 20:29:05');
+(24, 3, 'Cetak Peminjaman', '2024-07-31 20:29:05', '2024-07-31 20:29:05'),
+(25, 1, 'Cetak Mobil', '2024-08-06 09:28:36', '2024-08-06 09:28:36'),
+(26, 1, 'Cetak Mobil', '2024-08-06 09:28:37', '2024-08-06 09:28:37'),
+(27, 1, 'Cetak Mobil', '2024-08-06 09:29:41', '2024-08-06 09:29:41'),
+(28, 1, 'Cetak Mobil', '2024-08-06 09:29:46', '2024-08-06 09:29:46'),
+(29, 1, 'Cetak Mobil', '2024-08-06 09:29:50', '2024-08-06 09:29:50'),
+(30, 1, 'Cetak Mobil', '2024-08-06 09:29:53', '2024-08-06 09:29:53'),
+(31, 1, 'Cetak Mobil', '2024-08-06 09:32:34', '2024-08-06 09:32:34'),
+(32, 1, 'Cetak Mobil', '2024-08-06 09:33:05', '2024-08-06 09:33:05'),
+(33, 1, 'Cetak Mobil', '2024-08-06 09:33:09', '2024-08-06 09:33:09'),
+(34, 1, 'Cetak Mobil', '2024-08-06 09:33:12', '2024-08-06 09:33:12'),
+(35, 1, 'Cetak Mobil', '2024-08-06 09:33:15', '2024-08-06 09:33:15'),
+(36, 2, 'Cetak Peminjaman', '2024-08-07 06:17:41', '2024-08-07 06:17:41'),
+(37, 2, 'Cetak Peminjaman', '2024-08-07 06:17:50', '2024-08-07 06:17:50'),
+(38, 2, 'Cetak Peminjaman', '2024-08-07 06:17:56', '2024-08-07 06:17:56'),
+(39, 2, 'Cetak Peminjaman', '2024-08-07 06:18:01', '2024-08-07 06:18:01'),
+(40, 1, 'Cetak Peminjaman', '2024-08-07 06:18:35', '2024-08-07 06:18:35'),
+(41, 1, 'Cetak Peminjaman', '2024-08-07 06:18:40', '2024-08-07 06:18:40'),
+(42, 1, 'Cetak Peminjaman', '2024-08-07 06:18:45', '2024-08-07 06:18:45');
 
 -- --------------------------------------------------------
 
@@ -576,7 +594,8 @@ INSERT INTO `users` (`id`, `nip`, `full_name`, `email`, `phone`, `username`, `pa
 (1, '199291291', 'Bayu Nugraha', 'administrator@email.com', '+6282339449736', 'administrator', '$2y$10$VRb8vjS2S4CLtiCMD7oi2e.raNTMCJukqgc5EAE9RD.LgcPdrbfkq', 'Administrator', '2024-01-11 01:46:46', '2024-08-04 10:26:24', NULL),
 (2, '102039842', 'Muslimah S.Pd', 'petugas@email.com', '+6282339449735', 'petugas', '$2y$10$Iat8ESA65pM9glFY.pKDse/s2p75AfsD9xChagiCqe04fCVsHmOZu', 'Petugas', '2024-01-24 09:12:09', '2024-08-03 21:21:54', NULL),
 (3, '196501201990032006', 'Dra. Hj. Nurliani, M.AP', 'kepdin@email.com', '+628123456789', 'kepdin', '$2y$10$q4.hhkm66IQ6eZ2c4h238.oRlIyqHZ7QscczkFnUMz0BaRo.SLxZq', 'Kepala Dinas', '2024-01-24 09:12:09', '2024-08-03 21:22:19', NULL),
-(4, '19738234847', 'Puspita Sari, S. Pd', 'petugas2@email.com', '+682129217575', 'puspitasari', '$2y$10$d/EKpq8TquWBVl7VusrbFehVMWcq1heXZZ/rmosRzS32eJyqVQVHK', 'Petugas', '2024-08-03 20:13:56', '2024-08-04 10:33:13', '2024-08-04 02:33:13');
+(4, '19738234847', 'Puspita Sari, S. Pd', 'petugas2@email.com', '+682129217575', 'puspitasari', '$2y$10$d/EKpq8TquWBVl7VusrbFehVMWcq1heXZZ/rmosRzS32eJyqVQVHK', 'Petugas', '2024-08-03 20:13:56', '2024-08-04 10:33:13', '2024-08-04 02:33:13'),
+(5, '122121212', 'Pep Guardiola', 'petugasbaru@email.com', '+6281231313', 'carloa', '$2y$10$zHRJy/txYGVM3vc/8jF/KOQJhNalYddqAnEV6BwxyOaiOay4quIgG', 'Petugas', '2024-08-07 19:49:59', '2024-08-07 19:53:53', '2024-08-07 11:53:53');
 
 --
 -- Indexes for dumped tables
@@ -678,19 +697,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `book_stock`
 --
 ALTER TABLE `book_stock`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `facilitys`
@@ -708,13 +727,13 @@ ALTER TABLE `fines`
 -- AUTO_INCREMENT for table `loans`
 --
 ALTER TABLE `loans`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -732,13 +751,13 @@ ALTER TABLE `performances`
 -- AUTO_INCREMENT for table `racks`
 --
 ALTER TABLE `racks`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -750,7 +769,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

@@ -35,7 +35,7 @@
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label for="last_name" class="form-label">Nama belakang</label>
-          <input type="text" class="form-control <?php if ($validation->hasError('last_name')) : ?>is-invalid<?php endif ?>" id="last_name" name="last_name" value="<?= $oldInput['last_name'] ?? $memberss['last_name'] ?? ''; ?>">
+          <input type="text" class="form-control <?php if ($validation->hasError('last_name')) : ?>is-invalid<?php endif ?>" id="last_name" name="last_name" value="<?= $oldInput['last_name'] ?? $members['last_name'] ?? ''; ?>">
           <div class="invalid-feedback">
             <?= $validation->getError('last_name'); ?>
           </div>
@@ -54,6 +54,22 @@
           <input type="tel" class="form-control <?php if ($validation->hasError('phone')) : ?>is-invalid<?php endif ?>" id="phone" name="phone" value="<?= $oldInput['phone'] ?? $members['phone'] ?? ''; ?>" placeholder="+628912345" required>
           <div class="invalid-feedback">
             <?= $validation->getError('phone'); ?>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control <?php if ($validation->hasError('username')) : ?>is-invalid<?php endif ?>" id="username" name="username" value="<?= $oldInput['username'] ?? $members['username'] ?? ''; ?>" placeholder="johndoe" required>
+          <div class="invalid-feedback">
+            <?= $validation->getError('username'); ?>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label for="password" class="form-label">Password baru</label>
+            <input type="password" class="form-control <?php if ($validation->hasError('password')) : ?>is-invalid<?php endif ?>" id="password" name="password" value="<?= $oldInput['password'] ?? ''; ?>" placeholder="*****">
+          <div class="invalid-feedback">
+            <?= $validation->getError('password'); ?>
           </div>
         </div>
       </div>

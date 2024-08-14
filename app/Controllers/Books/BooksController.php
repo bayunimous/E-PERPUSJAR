@@ -230,7 +230,7 @@ class BooksController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Insert new book successful']);
-        return redirect()->to('admin/books');
+        return redirect()->to('books');
     }
 
     /**
@@ -362,7 +362,7 @@ class BooksController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Update book successful']);
-        return redirect()->to('admin/books');
+        return redirect()->to('books');
     }
 
     /**
@@ -394,6 +394,6 @@ class BooksController extends BaseController
         deleteBookCover($book['book_cover']);
 
         session()->setFlashdata(['msg' => 'Book deleted successfully']);
-        return redirect()->to('admin/books');
+        return redirect()->to('books');
     }
 }

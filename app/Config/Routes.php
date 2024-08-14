@@ -126,6 +126,13 @@ $routes->put('users/(:num)', 'Users\UsersController::update/$1');
 $routes->post('users/new', 'Users\UsersController::new');
 $routes->resource('users', ['controller' => 'Users\UsersController']);
 
+// $routes->put('mobil/(:num)', 'Mobil::update/$1');
+// $routes->post('mobil/new', 'Mobil::new');
+// $routes->resource('mobil', ['controller' => 'Mobil']);
+
+// $routes->get('reports/mobil', 'Mobil::report_mobil');
+// $routes->get('reports/report_mobil', 'Mobil::printReportMobil');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

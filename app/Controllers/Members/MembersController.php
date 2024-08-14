@@ -337,22 +337,29 @@ class MembersController extends BaseController
             throw new PageNotFoundException('Member not found');
         }
 
-        if (!$this->validate([
+        $rules = [
             'first_name'    => 'required|alpha_numeric_punct|max_length[100]',
             'last_name'     => 'permit_empty|alpha_numeric_punct|max_length[100]',
             'email'         => 'required|valid_email|max_length[255]',
             'phone'         => 'required|alpha_numeric_punct|min_length[4]|max_length[20]',
+            'username'      => 'required|max_length[20]',
             'address'       => 'required|string|min_length[5]|max_length[511]',
             'date_of_birth' => 'required|valid_date',
             'gender'        => 'required|alpha_numeric_punct',
-        ])) {
+        ];
+
+        if ($this->request->getVar('password')) {
+            $rules['password'] = 'required|min_length[6]|max_length[50]';
+        }
+
+        if (!$this->validate($rules)) {
             $data = [
                 'members'    => $members,
                 'validation' => \Config\Services::validation(),
                 'oldInput'   => $this->request->getVar(),
                 'user'       => $this->base_data['user']
             ];
-
+    
             return view('members/edit', $data);
         }
 
@@ -385,25 +392,32 @@ class MembersController extends BaseController
             $qrCode = $members['qr_code'];
         }
 
-        if (!$this->memberModel->save([
+        $data = [
             'id'            => $members['id'],
             'uid'           => $uid,
             'first_name'    => $this->request->getVar('first_name'),
             'last_name'     => $this->request->getVar('last_name'),
             'email'         => $this->request->getVar('email'),
             'phone'         => $this->request->getVar('phone'),
+            'username'      => $this->request->getVar('username'),
             'address'       => $this->request->getVar('address'),
             'date_of_birth' => $this->request->getVar('date_of_birth'),
             'gender'        => $this->request->getVar('gender'),
             'qr_code'       => $qrCode
-        ])) {
+        ];
+
+        if ($this->request->getVar('password')) {
+            $data['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+        }
+
+        if (!$this->memberModel->save($data)) {
             $data = [
                 'validation' => \Config\Services::validation(),
                 'oldInput'   => $this->request->getVar(),
                 'user'       => $this->base_data['user']
             ];
-
-            session()->setFlashdata(['msg' => 'Insert failed']);
+    
+            session()->setFlashdata(['msg' => 'Update failed']);
             return view('members/edit', $data);
         }
 

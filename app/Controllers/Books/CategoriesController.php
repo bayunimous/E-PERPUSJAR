@@ -153,7 +153,7 @@ class CategoriesController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Insert new category successful']);
-        return redirect()->to('admin/categories');
+        return redirect()->to('categories');
     }
 
     /**
@@ -230,7 +230,7 @@ class CategoriesController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Update category successful']);
-        return redirect()->to('admin/categories');
+        return redirect()->to('categories');
     }
 
     /**
@@ -257,6 +257,6 @@ class CategoriesController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Category deleted successfully']);
-        return redirect()->to('admin/categories');
+        return redirect()->to('categories');
     }
 }
