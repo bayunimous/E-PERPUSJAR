@@ -260,7 +260,7 @@ class FinesController extends BaseController
         }
 
         session()->setFlashdata(['msg' => 'Update fine successful']);
-        return redirect()->to('admin/fines');
+        return redirect()->to('fines');
     }
 
     public function reportFines()
