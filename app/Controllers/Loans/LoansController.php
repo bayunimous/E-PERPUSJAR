@@ -591,16 +591,16 @@ class LoansController extends BaseController
         }
 
         if ($loanDateFrom && $loanDateTo) {
-            $loansQuery->where('loans.loan_date >=', date('Y-m-d', strtotime($loanDateFrom)))
-                ->where('loans.loan_date <=', date('Y-m-d', strtotime($loanDateTo)));
+            $loansQuery->where('loans.loan_date >=', date('Y-m-d 00:00:00', strtotime($loanDateFrom)))
+                ->where('loans.loan_date <=', date('Y-m-d 23:59:59', strtotime($loanDateTo)));
         }
         if ($dueDateFrom && $dueDateTo) {
-            $loansQuery->where('loans.due_date >=', date('Y-m-d', strtotime($dueDateFrom)))
-                ->where('loans.due_date <=', date('Y-m-d', strtotime($dueDateTo)));
+            $loansQuery->where('loans.due_date >=', date('Y-m-d 00:00:00', strtotime($dueDateFrom)))
+                ->where('loans.due_date <=', date('Y-m-d 23:59:59', strtotime($dueDateTo)));
         }
         if ($returnDateFrom && $returnDateTo) {
-            $loansQuery->where('loans.return_date >=', date('Y-m-d', strtotime($returnDateFrom)))
-                ->where('loans.return_date <=', date('Y-m-d', strtotime($returnDateTo)));
+            $loansQuery->where('loans.return_date >=', date('Y-m-d 00:00:00', strtotime($returnDateFrom)))
+                ->where('loans.return_date <=', date('Y-m-d 23:59:59', strtotime($returnDateTo)));
         }
 
         $loans = $loansQuery->paginate($itemPerPage, 'loans');
@@ -617,6 +617,7 @@ class LoansController extends BaseController
             'currentPage'       => $this->request->getVar('page_returns') ?? 1,
             'itemPerPage'       => $itemPerPage,
             'user'              => $this->base_data['user'],
+            'search'            => $this->request->getGet('search'),
             'loanDateFrom'      => $loanDateFrom,
             'loanDateTo'        => $loanDateTo,
             'dueDateFrom'       => $dueDateFrom,
@@ -642,18 +643,26 @@ class LoansController extends BaseController
             ->join('members', 'loans.member_id = members.id', 'LEFT')
             ->join('books', 'loans.book_id = books.id', 'LEFT')
             ->where('loans.status_loan', 'Setuju');
-    
+
+        if ($keyword = $this->request->getGet('search')) {
+            $loansQuery->groupStart()
+                ->like('first_name', $keyword, 'both', true)
+                ->orLike('last_name', $keyword, 'both', true)
+                ->orLike('title', $keyword, 'both', true)
+                ->groupEnd();
+        }
+
         if ($loanDateFrom && $loanDateTo) {
-            $loansQuery->where('loans.loan_date >=', date('Y-m-d', strtotime($loanDateFrom)))
-                ->where('loans.loan_date <=', date('Y-m-d', strtotime($loanDateTo)));
+            $loansQuery->where('loans.loan_date >=', date('Y-m-d 00:00:00', strtotime($loanDateFrom)))
+                ->where('loans.loan_date <=', date('Y-m-d 23:59:59', strtotime($loanDateTo)));
         }
         if ($dueDateFrom && $dueDateTo) {
-            $loansQuery->where('loans.due_date >=', date('Y-m-d', strtotime($dueDateFrom)))
-                ->where('loans.due_date <=', date('Y-m-d', strtotime($dueDateTo)));
+            $loansQuery->where('loans.due_date >=', date('Y-m-d 00:00:00', strtotime($dueDateFrom)))
+                ->where('loans.due_date <=', date('Y-m-d 23:59:59', strtotime($dueDateTo)));
         }
         if ($returnDateFrom && $returnDateTo) {
-            $loansQuery->where('loans.return_date >=', date('Y-m-d', strtotime($returnDateFrom)))
-                ->where('loans.return_date <=', date('Y-m-d', strtotime($returnDateTo)));
+            $loansQuery->where('loans.return_date >=', date('Y-m-d 00:00:00', strtotime($returnDateFrom)))
+                ->where('loans.return_date <=', date('Y-m-d 23:59:59', strtotime($returnDateTo)));
         }
 
         $loans = $loansQuery->findAll();

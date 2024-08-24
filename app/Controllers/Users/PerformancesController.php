@@ -46,14 +46,16 @@ class PerformancesController extends BaseController
                 ->join('users', 'performances.user_id = users.id', 'LEFT');
 
         if ($keyword = $this->request->getGet('search')) {
-            $performancesQuery->like('full_name', $keyword, insensitiveSearch: true)
-                ->orLike('rating', $keyword, insensitiveSearch: true)
-                ->orLike('description', $keyword, insensitiveSearch: true);
+            $performancesQuery->groupStart()
+                ->like('full_name', $keyword, 'both', true)
+                ->orLike('rating', $keyword, 'both', true)
+                ->orLike('description', $keyword, 'both', true)
+                ->groupEnd();
         }
 
         if ($addDateFrom && $addDateTo) {
-            $performancesQuery->where('performances.created_at >=', date('Y-m-d', strtotime($addDateFrom)))
-                ->where('performances.created_at <=', date('Y-m-d', strtotime($addDateTo)));
+            $performancesQuery->where('performances.created_at >=', date('Y-m-d 00:00:00', strtotime($addDateFrom)))
+                ->where('performances.created_at <=', date('Y-m-d 23:59:59', strtotime($addDateTo)));
         }
 
         $performances = $performancesQuery->paginate($itemPerPage, 'performances');
@@ -82,9 +84,17 @@ class PerformancesController extends BaseController
                 ->select('users.*, users.id as user_id, performances.*')
                 ->join('users', 'performances.user_id = users.id', 'LEFT');
 
+        if ($keyword = $this->request->getGet('search')) {
+            $performancesQuery->groupStart()
+                ->like('full_name', $keyword, 'both', true)
+                ->orLike('rating', $keyword, 'both', true)
+                ->orLike('description', $keyword, 'both', true)
+                ->groupEnd();
+        }
+
         if ($addDateFrom && $addDateTo) {
-            $performancesQuery->where('performances.created_at >=', date('Y-m-d', strtotime($addDateFrom)))
-                ->where('performances.created_at <=', date('Y-m-d', strtotime($addDateTo)));
+            $performancesQuery->where('performances.created_at >=', date('Y-m-d 00:00:00', strtotime($addDateFrom)))
+                ->where('performances.created_at <=', date('Y-m-d 23:59:59', strtotime($addDateTo)));
         }
 
         $performances = $performancesQuery->findAll();
@@ -110,7 +120,7 @@ class PerformancesController extends BaseController
             $dompdf->setPaper('A4', 'portrait');
             $dompdf->render();
 
-            $dompdf->stream("Laporan Data Pelayanan Petugas E-PERPUSJAR");
+            $dompdf->stream("Laporan Data Penggunaan Fasilitas E-PERPUSJAR");
         }
 
         return view('performances/report_performances', ['performances' => $performances, 'kepdin' => $kepdin]);

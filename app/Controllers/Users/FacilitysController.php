@@ -46,8 +46,8 @@ class FacilitysController extends BaseController
         }
 
         if ($addDateFrom && $addDateTo) {
-            $facilitysQuery->where('facilitys.created_at >=', date('Y-m-d', strtotime($addDateFrom)))
-                ->where('facilitys.created_at <=', date('Y-m-d', strtotime($addDateTo)));
+            $facilitysQuery->where('facilitys.created_at >=', date('Y-m-d 00:00:00', strtotime($addDateFrom)))
+                ->where('facilitys.created_at <=', date('Y-m-d 23:59:59', strtotime($addDateTo)));
         }
 
         $facilitys = $facilitysQuery->paginate($itemPerPage, 'facilitys');
@@ -74,9 +74,14 @@ class FacilitysController extends BaseController
 
         $facilitysQuery = $this->facilityModel;
 
+        if ($keyword = $this->request->getGet('search')) {
+            $facilitysQuery->like('title', $keyword, insensitiveSearch: true)
+                ->orLike('description', $keyword, insensitiveSearch: true);
+        }
+
         if ($addDateFrom && $addDateTo) {
-            $facilitysQuery->where('facilitys.created_at >=', date('Y-m-d', strtotime($addDateFrom)))
-                ->where('facilitys.created_at <=', date('Y-m-d', strtotime($addDateTo)));
+            $facilitysQuery->where('facilitys.created_at >=', date('Y-m-d 00:00:00', strtotime($addDateFrom)))
+                ->where('facilitys.created_at <=', date('Y-m-d 23:59:59', strtotime($addDateTo)));
         }
 
         $facilitys = $facilitysQuery->findAll();

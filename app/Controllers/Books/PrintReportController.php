@@ -78,14 +78,16 @@ class PrintReportController extends BaseController
                 ->join('users', 'reports.user_id = users.id', 'LEFT');
 
         if ($keyword = $this->request->getGet('search')) {
-            $reportsQuery->like('full_name', $keyword, insensitiveSearch: true)
-                ->orLike('role', $keyword, insensitiveSearch: true)
-                ->orLike('description', $keyword, insensitiveSearch: true);
+            $reportsQuery->groupStart()
+                ->like('full_name', $keyword, 'both', true)
+                ->orLike('role', $keyword, 'both', true)
+                ->orLike('description', $keyword, 'both', true)
+                ->groupEnd();
         }
 
         if ($printDateFrom && $printDateTo) {
-            $reportsQuery->where('reports.created_at >=', date('Y-m-d', strtotime($printDateFrom)))
-                ->where('reports.created_at <=', date('Y-m-d', strtotime($printDateTo)));
+            $reportsQuery->where('reports.created_at >=', date('Y-m-d 00:00:00', strtotime($printDateFrom)))
+                ->where('reports.created_at <=', date('Y-m-d 23:59:59', strtotime($printDateTo)));
         }
 
         $reports = $reportsQuery->paginate($itemPerPage, 'reports');
@@ -121,14 +123,16 @@ class PrintReportController extends BaseController
                 ->join('users', 'reports.user_id = users.id', 'LEFT');
 
         if ($keyword = $this->request->getGet('search')) {
-            $reportsQuery->like('full_name', $keyword, insensitiveSearch: true)
-                ->orLike('role', $keyword, insensitiveSearch: true)
-                ->orLike('description', $keyword, insensitiveSearch: true);
+            $reportsQuery->groupStart()
+                ->like('full_name', $keyword, 'both', true)
+                ->orLike('role', $keyword, 'both', true)
+                ->orLike('description', $keyword, 'both', true)
+                ->groupEnd();
         }
 
         if ($printDateFrom && $printDateTo) {
-            $reportsQuery->where('reports.created_at >=', date('Y-m-d', strtotime($printDateFrom)))
-                ->where('reports.created_at <=', date('Y-m-d', strtotime($printDateTo)));
+            $reportsQuery->where('reports.created_at >=', date('Y-m-d 00:00:00', strtotime($printDateFrom)))
+                ->where('reports.created_at <=', date('Y-m-d 23:59:59', strtotime($printDateTo)));
         }
 
         $reports = $reportsQuery->findAll();

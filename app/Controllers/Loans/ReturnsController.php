@@ -499,13 +499,13 @@ class ReturnsController extends BaseController
         }
 
         if ($loanDateFrom && $loanDateTo) {
-            $loansQuery->where('loans.loan_date >=', date('Y-m-d', strtotime($loanDateFrom)))
-                ->where('loans.loan_date <=', date('Y-m-d', strtotime($loanDateTo)));
+            $loansQuery->where('loans.loan_date >=', date('Y-m-d 00:00:00', strtotime($loanDateFrom)))
+                ->where('loans.loan_date <=', date('Y-m-d 23:59:59', strtotime($loanDateTo)));
         }
 
         if ($returnDateFrom && $returnDateTo) {
-            $loansQuery->where('loans.return_date >=', date('Y-m-d', strtotime($returnDateFrom)))
-                ->where('loans.return_date <=', date('Y-m-d', strtotime($returnDateTo)));
+            $loansQuery->where('loans.return_date >=', date('Y-m-d 00:00:00', strtotime($returnDateFrom)))
+                ->where('loans.return_date <=', date('Y-m-d 23:59:59', strtotime($returnDateTo)));
         }
 
         $loans = $loansQuery->paginate($itemPerPage, 'loans');
@@ -516,6 +516,7 @@ class ReturnsController extends BaseController
             'currentPage'       => $this->request->getVar('page_returns') ?? 1,
             'itemPerPage'       => $itemPerPage,
             'user'              => $this->base_data['user'],
+            'search'            => $this->request->getGet('search'),
             'loanDateFrom'      => $loanDateFrom,
             'loanDateTo'        => $loanDateTo,
             'returnDateFrom'    => $returnDateFrom,
@@ -539,14 +540,22 @@ class ReturnsController extends BaseController
             ->join('fines', 'fines.loan_id = loans.id', 'LEFT')
             ->where('loans.status_return', 'Setuju');
 
+        if ($keyword = $this->request->getGet('search')) {
+            $loansQuery->groupStart()
+                ->like('first_name', $keyword, 'both', true)
+                ->orLike('last_name', $keyword, 'both', true)
+                ->orLike('title', $keyword, 'both', true)
+                ->groupEnd();
+        }
+
         if ($loanDateFrom && $loanDateTo) {
-            $loansQuery->where('loans.loan_date >=', date('Y-m-d', strtotime($loanDateFrom)))
-                ->where('loans.loan_date <=', date('Y-m-d', strtotime($loanDateTo)));
+            $loansQuery->where('loans.loan_date >=', date('Y-m-d 00:00:00', strtotime($loanDateFrom)))
+                ->where('loans.loan_date <=', date('Y-m-d 23:59:59', strtotime($loanDateTo)));
         }
 
         if ($returnDateFrom && $returnDateTo) {
-            $loansQuery->where('loans.return_date >=', date('Y-m-d', strtotime($returnDateFrom)))
-                ->where('loans.return_date <=', date('Y-m-d', strtotime($returnDateTo)));
+            $loansQuery->where('loans.return_date >=', date('Y-m-d 00:00:00', strtotime($returnDateFrom)))
+                ->where('loans.return_date <=', date('Y-m-d 23:59:59', strtotime($returnDateTo)));
         }
 
         $loans = $loansQuery->findAll();

@@ -289,8 +289,8 @@ class UsersController extends BaseController
         }
 
         if ($addDateFrom && $addDateTo) {
-            $usersQuery->where('users.created_at >=', date('Y-m-d', strtotime($addDateFrom)))
-                ->where('users.created_at <=', date('Y-m-d', strtotime($addDateTo)));
+            $usersQuery->where('users.created_at >=', date('Y-m-d 00:00:00', strtotime($addDateFrom)))
+                ->where('users.created_at <=', date('Y-m-d 23:59:59', strtotime($addDateTo)));
         }
 
         $users = $usersQuery->paginate($itemPerPage, 'users');
@@ -316,9 +316,20 @@ class UsersController extends BaseController
 
         $usersQuery = $this->userModel;
 
+        if ($keyword = $this->request->getGet('search')) {
+            $usersQuery->groupStart()
+                ->like('nip', $keyword, 'both', true)
+                ->orLike('full_name', $keyword, 'both', true)
+                ->orLike('email', $keyword, 'both', true)
+                ->orLike('phone', $keyword, 'both', true)
+                ->orLike('username', $keyword, 'both', true)
+                ->orLike('role', $keyword, 'both', true)
+                ->groupEnd();
+        }
+
         if ($addDateFrom && $addDateTo) {
-            $usersQuery->where('users.created_at >=', date('Y-m-d', strtotime($addDateFrom)))
-                ->where('users.created_at <=', date('Y-m-d', strtotime($addDateTo)));
+            $usersQuery->where('users.created_at >=', date('Y-m-d 00:00:00', strtotime($addDateFrom)))
+                ->where('users.created_at <=', date('Y-m-d 23:59:59', strtotime($addDateTo)));
         }
         
         $users = $usersQuery->findAll();
@@ -341,7 +352,7 @@ class UsersController extends BaseController
             $options->set('isRemoteEnabled', true);
             $dompdf = new \Dompdf\Dompdf($options);
             $dompdf->loadHtml($pdfView);
-            $dompdf->setPaper('A4', 'landscape');
+            $dompdf->setPaper('A4', 'portrait');
             $dompdf->render();
 
             $dompdf->stream("Laporan Data Pengguna E-PERPUSJAR");

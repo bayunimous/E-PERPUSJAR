@@ -42,7 +42,7 @@
                   <button class="btn btn-outline-secondary" type="submit" id="searchButton">Cari</button>
                 </div>
                 <div class="col-md-6 d-grid">
-                  <a href="<?= base_url('reports/print_report') . '?print_date_from=' . $printDateFrom . '&print_date_to=' . $printDateTo; ?>" class="btn btn-primary py-2">
+                  <a href="<?= base_url('reports/print_report') . '?search=' . $search . '&print_date_from=' . $printDateFrom . '&print_date_to=' . $printDateTo; ?>" class="btn btn-primary py-2">
                     <i class="ti ti-print"></i>
                     Cetak
                   </a>
